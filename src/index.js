@@ -32,8 +32,16 @@ const limiter = rateLimit({
   headers: true,
 });
 
+const corsOptions = {
+  origin: "*", // Allows all origins (for production, you should replace "*" with your frontend URL)
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  allowedHeaders: "Content-Type, Authorization",
+};
+
+app.use(cors(corsOptions)); // Apply CORS with the options above
+app.options("*", cors(corsOptions)); // Allow OPTIONS requests
+
 app.use(limiter);
-app.use(cors({ origin: ["*"] }));
 app.use(express.json());
 app.use(helmet());
 
