@@ -1,9 +1,11 @@
 import sanitizeHtml from "sanitize-html";
+import dotenv from "dotenv";
+dotenv.config();
 
 import { getDatabase } from "./mongo.js";
 
-const MONGO_COLLECTION_LIGHT_DATA = "verified_post_summaries";
-const MONGO_COLLECTION_POST_HTML = "post_html_contents";
+const MONGO_COLLECTION_LIGHT_DATA = process.env.MONGO_COLLECTION_LIGHT_DATA;
+const MONGO_COLLECTION_POST_HTML = process.env.MONGO_COLLECTION_POST_HTML;
 
 async function list(_req, res) {
   try {
